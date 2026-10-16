@@ -61,6 +61,25 @@
         }
       }
     },
+    "warningMemoTextTooLong": {
+      "type": "object",
+      "required": ["code", "severity", "message", "context"],
+      "additionalProperties": false,
+      "properties": {
+        "code": { "type": "string", "const": "MEMO_TEXT_TOO_LONG" },
+        "severity": { "type": "string", "const": "error" },
+        "message": { "type": "string" },
+        "context": {
+          "type": "object",
+          "required": ["byteLength", "maxByteLength"],
+          "additionalProperties": false,
+          "properties": {
+            "byteLength": { "type": "integer", "minimum": 0 },
+            "maxByteLength": { "type": "integer", "const": 28 }
+          }
+        }
+      }
+    },
     "warningGeneric": {
       "type": "object",
       "required": ["code", "severity", "message"],
@@ -100,6 +119,7 @@
         { "$ref": "#/definitions/warningNormalization" },
         { "$ref": "#/definitions/warningInvalidDestination" },
         { "$ref": "#/definitions/warningUnsupportedMemoType" },
+        { "$ref": "#/definitions/warningMemoTextTooLong" },
         { "$ref": "#/definitions/warningGeneric" }
       ]
     }
@@ -122,7 +142,16 @@
           "input": {
             "type": "object",
             "properties": {
-              "routingId": { "$ref": "#/definitions/routingId" }
+              "routingId": { "$ref": "#/definitions/routingId" },
+              "memo": {
+                "type": "object",
+                "required": ["type", "value"],
+                "additionalProperties": false,
+                "properties": {
+                  "type": { "type": "string", "enum": ["text", "id", "hash", "return"] },
+                  "value": { "type": "string" }
+                }
+              }
             }
           },
           "expected": {
