@@ -98,6 +98,10 @@
         { "$ref": "#/definitions/warningUnsupportedMemoType" },
         { "$ref": "#/definitions/warningGeneric" }
       ]
+    },
+    "addressKind": {
+      "type": "string",
+      "enum": ["KindG", "KindC", "KindM", "KindUnknown"]
     }
   },
   "type": "object",
@@ -119,6 +123,7 @@
           "expected": {
             "type": "object",
             "properties": {
+              "kind": { "$ref": "#/definitions/addressKind" },
               "warnings": {
                 "type": "array",
                 "items": { "$ref": "#/definitions/warning" }
