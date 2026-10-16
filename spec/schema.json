@@ -79,7 +79,8 @@
       "enum": [
         "INVALID_CHECKSUM", "INVALID_LENGTH", "INVALID_BASE32",
         "UNKNOWN_PREFIX", "REJECTED_SEED_KEY", "REJECTED_PREAUTH",
-        "REJECTED_HASH_X", "FEDERATION_ADDRESS_NOT_SUPPORTED"
+        "REJECTED_HASH_X", "FEDERATION_ADDRESS_NOT_SUPPORTED",
+        "INVALID_DOMAIN_NAME"
       ]
     },
     "destinationError": {
@@ -89,6 +90,12 @@
         "code": { "$ref": "#/definitions/errorCode" },
         "message": { "type": "string" }
       }
+    },
+    "domainName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 253,
+      "pattern": "^(?=.{1,253}$)([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
     },
     "warning": {
       "oneOf": [
@@ -111,10 +118,15 @@
         "properties": {
           "module": {
             "type": "string",
-            "enum": ["detect", "muxed_encode", "muxed_decode", "extract_routing", "extract_from_uri"]
+            "enum": ["detect", "muxed_encode", "muxed_decode", "extract_routing", "extract_from_uri", "toml_lookup"]
           },
           "description": { "type": "string" },
-          "input": { "type": "object" },
+          "input": {
+            "type": "object",
+            "properties": {
+              "domain": { "$ref": "#/definitions/domainName" }
+            }
+          },
           "expected": {
             "type": "object",
             "properties": {
