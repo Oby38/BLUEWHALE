@@ -97,6 +97,14 @@
         { "$ref": "#/definitions/warningUnsupportedMemoType" },
         { "$ref": "#/definitions/warningGeneric" }
       ]
+    },
+    "extractRoutingMemo": {
+      "description": "Memo input for extract_routing. Three equivalent 'no memo' forms are accepted and MUST all normalize to routingId: null with no warnings: (1) memo omitted entirely, (2) memo: null, (3) memo: \"\" (empty string). An empty string is treated as no memo rather than an invalid memo value. Non-empty strings are interpreted as memo text; numeric values are interpreted as memo id.",
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string" },
+        { "type": "integer" }
+      ]
     }
   },
   "type": "object",
@@ -114,10 +122,16 @@
             "enum": ["detect", "muxed_encode", "muxed_decode", "extract_routing", "extract_from_uri"]
           },
           "description": { "type": "string" },
-          "input": { "type": "object" },
+          "input": {
+            "type": "object",
+            "properties": {
+              "memo": { "$ref": "#/definitions/extractRoutingMemo" }
+            }
+          },
           "expected": {
             "type": "object",
             "properties": {
+              "routingId": { "type": ["string", "null"] },
               "warnings": {
                 "type": "array",
                 "items": { "$ref": "#/definitions/warning" }
