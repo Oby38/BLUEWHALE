@@ -10,5 +10,6 @@ export * from "./routing/extractFromTx";
 export * from "./routing/extractFromURI";  // ← NEW
 export * from "./routing/types";
 export * from "./routing/safeRoutingId";
+export * from "./routing/result";
 export * from "./routing/memo";
 export * from "./routing/memoRequirement";
