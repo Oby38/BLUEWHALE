@@ -14,6 +14,15 @@ Go module versions are published as git tags of the form
 
 ### Added
 
+- `sep0029` package: `ParseTOML` reads the routing fields of a stellar.toml
+  (`ORG_NAME`, `ACCOUNTS`, `MEMO_REQUIRED_ACCOUNTS`, ...) with a dependency-free
+  TOML parser, a 100KB size cap and typed errors (`ErrTOMLTooLarge`,
+  `*SyntaxError`/`ErrInvalidTOML`), covered by table-driven tests.
+- `sep0029.Client` with `HTTPClientOptions` (`Timeout`, `MaxRetries`,
+  `BackoffDuration`): per-attempt timeouts, exponential-backoff retries on
+  network errors, 429 and 5xx, and a 100KB response body limit.
+- `FuzzExtractRoutingFromURI`, seeded with the `spec/vectors.json` URIs and
+  malformed SEP-0007 edge cases.
 - `address.AllWarningCodes`, `WarningCode.String` and `WarningCode.IsKnown`,
   plus a cross-language parity test (`spec/warning_codes_test.go`) that reads
   `spec/schema.json` and asserts this package's code list matches it.

@@ -3,6 +3,7 @@ export * from "./address/detect";
 export * from "./address/validate";
 export * from "./address/parse";
 export * from "./address/types";
+export * from "./predicates";
 export * from "./muxed/encode";
 export * from "./muxed/decode";
 export * from "./routing/extract";
