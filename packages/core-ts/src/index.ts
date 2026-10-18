@@ -5,6 +5,7 @@ export * from "./address/parse";
 export * from "./address/types";
 export * from "./muxed/encode";
 export * from "./muxed/decode";
+export * from "./strkey/crc16";
 export * from "./routing/extract";
 export * from "./routing/extractFromTx";
 export * from "./routing/extractFromURI";  // ← NEW

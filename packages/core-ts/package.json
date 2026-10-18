@@ -5,6 +5,18 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "bun": "./dist/index.mjs",
+      "deno": "./dist/index.mjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
   "bin": {
     "stellar-route": "./dist/cli.js"
   },
@@ -15,6 +27,8 @@
     "build": "tsup src/index.ts src/cli.ts --format cjs,esm --dts",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:bun": "bun test ./tests/runtime/bun.smoke.ts",
+    "test:deno": "deno test --allow-read --allow-env tests/runtime/deno.smoke.ts",
     "lint": "eslint src/**/*.ts"
   },
   "peerDependencies": {
