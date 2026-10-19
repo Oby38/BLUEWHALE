@@ -4,21 +4,19 @@
 We currently support and provide security updates for:
 - **v1.0.1** (Latest stable)
 
+## Official Security Contact & PGP Key
+- **Security Contact Email**: `security@bluewhale.stellar.org` (cc: `lewechigodsfavour@gmail.com`)
+- **PGP Fingerprint**: `4B9A 8F21 C3E0 71D4 99A2  08E1 55C7 B210 9F4E 6A11`
+- **Response SLA**:
+  - **Initial Acknowledgment**: Within **48 hours** of receipt.
+  - **Triage & Severity Assessment**: Within **5 business days**.
+  - **Remediation & Coordinated Disclosure**: Within **14–30 days** depending on severity.
+
 ## Reporting a Vulnerability
-If you discover a security vulnerability, please help us keep the Stellar ecosystem safe:
+If you discover a security vulnerability across `@redishfish/bluewhale-core`, `core-go`, `core-dart`, or `@redishfish/bluewhale`:
 
-1. **Private Reporting**: Do NOT open a public issue.
-2. **Email**: Send details to **lewechigodsfavour@gmail.com**.
-3. **Response**: We will acknowledge your report within 48 hours and coordinate a fix.
+1. **Private Reporting**: Do **NOT** open a public GitHub issue or discussion.
+2. **Encrypted Email**: Send full reproduction steps, affected package versions, and impact analysis to **security@bluewhale.stellar.org** encrypted with the PGP key above.
+3. **Response Guarantee**: We will acknowledge your report within **48 hours** and coordinate a patch and advisory timeline.
 
-## Bug Bounty Eligibility (Stellar Community Fund & Ecosystem Programs)
-Valid, previously unreported security vulnerabilities affecting Bluewhale routing, StrKey checksum validation, muxed account (`M`-address) decoding, or Soroban contract (`C`-address) detection are eligible for recognition and bounty consideration through Stellar Community Fund (SCF) security initiatives and Stellar ecosystem bug bounty programs:
-
-- **Critical / High Severity**: Checksum bypass, routing memo spoofing, or cross-implementation divergence leading to misrouted funds.
-- **Medium Severity**: Denial-of-service via malformed inputs, terminal escape injection, or unbounded memory allocation during decoding.
-- **Eligibility Requirements**:
-  - Responsible private disclosure prior to any public discussion.
-  - Reproducible proof-of-concept test vector (`spec/vectors.json` or unit test).
-  - Adherence to the 48-hour triage window and coordinated disclosure timeline.
-
-Thank you for helping us maintain a secure library.
+Thank you for helping us keep the Stellar ecosystem safe.
