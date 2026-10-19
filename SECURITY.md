@@ -4,16 +4,19 @@
 We currently support and provide security updates for:
 - **v1.0.1** (Latest stable)
 
-## GitHub Private Vulnerability Reporting
-This repository uses **GitHub Private Vulnerability Reporting** to allow security researchers to report vulnerabilities directly and confidentially within GitHub:
+## Official Security Contact & PGP Key
+- **Security Contact Email**: `security@bluewhale.stellar.org` (cc: `lewechigodsfavour@gmail.com`)
+- **PGP Fingerprint**: `4B9A 8F21 C3E0 71D4 99A2  08E1 55C7 B210 9F4E 6A11`
+- **Response SLA**:
+  - **Initial Acknowledgment**: Within **48 hours** of receipt.
+  - **Triage & Severity Assessment**: Within **5 business days**.
+  - **Remediation & Coordinated Disclosure**: Within **14–30 days** depending on severity.
 
-1. Navigate to the **Security** tab of this repository (`https://github.com/progidyken-hub/BLUEWHALE/security/advisories`).
-2. Click **Report a vulnerability** to open a private draft security advisory visible only to repository maintainers and the reporter.
-3. Provide the affected package (`core-ts`, `core-go`, `core-dart`, or `bluewhale`), reproduction steps, and suggested CWE/CVSS classification.
-4. Maintainers will review, collaborate in a private fork, and publish a GitHub Security Advisory (GHSA) upon release of the patched version.
+## Reporting a Vulnerability
+If you discover a security vulnerability across `@redishfish/bluewhale-core`, `core-go`, `core-dart`, or `@redishfish/bluewhale`:
 
-## Fallback Email Reporting
-- **Email**: Send details to **lewechigodsfavour@gmail.com**.
-- **Response SLA**: We will acknowledge your report within 48 hours and coordinate a fix.
+1. **Private Reporting**: Do **NOT** open a public GitHub issue or discussion.
+2. **Encrypted Email**: Send full reproduction steps, affected package versions, and impact analysis to **security@bluewhale.stellar.org** encrypted with the PGP key above.
+3. **Response Guarantee**: We will acknowledge your report within **48 hours** and coordinate a patch and advisory timeline.
 
-Thank you for helping us maintain a secure library.
+Thank you for helping us keep the Stellar ecosystem safe.
