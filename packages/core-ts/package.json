@@ -23,6 +23,7 @@
   "devDependencies": {
     "@redishfish/bluewhale-spec": "workspace:*",
     "@stellar/stellar-sdk": "^17.1.0",
+    "@vitest/coverage-v8": "1.6.1",
     "eslint": "^10.11.0",
     "tsup": "^8.0.1",
     "typescript": "^7.0.2",
