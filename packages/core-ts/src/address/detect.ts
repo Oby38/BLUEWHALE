@@ -1,33 +1,6 @@
 import { StrKey } from "@stellar/stellar-sdk";
 
-const BASE32_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-
-/**
- * Decodes a Base32-encoded string into binary data.
- * @internal
- */
-function decodeBase32(input: string): Uint8Array {
-  const s = input.toUpperCase().replace(/=+$/, "");
-  const byteCount = Math.floor((s.length * 5) / 8);
-  const result = new Uint8Array(byteCount);
-  let buffer = 0;
-  let bitsLeft = 0;
-  let byteIndex = 0;
-  for (const ch of s) {
-    const value = BASE32_CHARS.indexOf(ch);
-    if (value === -1) throw new Error(`Invalid base32 character: ${ch}`);
-    buffer = (buffer << 5) | value;
-    bitsLeft += 5;
-    if (bitsLeft >= 8) {
-      if (byteIndex < byteCount) {
-        result[byteIndex++] = (buffer >> (bitsLeft - 8)) & 0xff;
-      }
-      bitsLeft -= 8;
-      buffer &= (1 << bitsLeft) - 1;
-    }
-  }
-  return result;
-}
+import { decodeBase32 } from "../strkey/base32";
 
 /**
  * Computes a 16-bit CRC (CCITT-FALSE) for binary validation.
