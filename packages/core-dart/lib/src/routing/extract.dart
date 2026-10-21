@@ -34,6 +34,11 @@ RoutingResult extractRoutingSync(RoutingInput input) {
   return _filterResultBySeverity(_extractRoutingUnfiltered(input), input.minSeverityLevel);
 }
 
+/// Extracts deposit routing synchronously (pure string parsing).
+///
+/// For async network checks (Federation, SEP-0029) use [extractRoutingAsync].
+RoutingResult extractRouting(RoutingInput input) => extractRoutingSync(input);
+
 /// Re-applies [RoutingInput.minSeverityLevel] to an already-built result.
 ///
 /// Returns [result] unchanged when the threshold is `info` (or unrecognized),
