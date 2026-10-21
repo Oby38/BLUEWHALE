@@ -36,3 +36,30 @@ jobs:
         with:
           version: v1.64.8
           working-directory: packages/core-go
+
+  zero-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: packages/core-go/go.mod
+      - name: Fail if go.mod declares external require directives
+        working-directory: packages/core-go
+        run: |
+          if grep -E '^[[:space:]]*require[[:space:]]' go.mod; then
+            echo "::error::packages/core-go/go.mod must not declare external dependencies (zero-dependency commitment)."
+            exit 1
+          fi
+      - name: Fail if go list -m all contains modules beyond the module itself
+        working-directory: packages/core-go
+        run: |
+          module=$(go list -m)
+          echo "module: ${module}"
+          extra=$(go list -m all | tail -n +2)
+          if [ -n "${extra}" ]; then
+            echo "::error::packages/core-go must have zero external dependencies, but found:"
+            echo "${extra}"
+            exit 1
+          fi
+          echo "OK: only ${module} is present."
