@@ -14,11 +14,25 @@ Go module versions are published as git tags of the form
 
 ### Added
 
+- Sentinel errors in the root `corego` package (`errors.go`):
+  `ErrInvalidChecksum`, `ErrInvalidLength` and `ErrUnsupportedScheme`. Each
+  matches, under `errors.Is`, any error from `address`, `muxed` or `routing`
+  carrying the same code, including through `fmt.Errorf("%w", err)` wrapping.
+- `ErrorCode()` on `address.RoutingError` and `*muxed.AddressError`.
+
 - `address.AllWarningCodes`, `WarningCode.String` and `WarningCode.IsKnown`,
   plus a cross-language parity test (`spec/warning_codes_test.go`) that reads
   `spec/schema.json` and asserts this package's code list matches it.
 
 ### Changed
+
+- `address.RoutingError.Is` also matches a `*RoutingError` target.
+- `*muxed.AddressError` now implements `Is` and matches by code. Previously
+  `errors.Is(err, muxed.ErrInvalidLengthError)` was false for errors built by
+  `DecodeMuxed`, because they are new pointers.
+- `routing.ErrInvalidScheme` is now a comparable custom error value (same
+  message), so `err == routing.ErrInvalidScheme` keeps working and it also
+  matches `corego.ErrUnsupportedScheme`.
 
 - **Breaking:** removed the unused legacy multi-chain fields
   `RoutingInput.SourceAddress`, `RoutingInput.TargetChains` and
