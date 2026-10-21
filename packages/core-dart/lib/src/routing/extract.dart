@@ -330,3 +330,23 @@ Future<RoutingResult> extractRoutingAsync(
   }
   return result;
 }
+
+/// Looks up whether [baseAccount] requires a memo over HTTP by querying Horizon account data (SEP-0029).
+/// Issue #61
+Future<bool> httpFetchMemoRequirement(
+  String baseAccount, {
+  String horizonUrl = 'https://horizon.stellar.org',
+  dynamic httpClient,
+}) async {
+  try {
+    final sanitizedUrl = horizonUrl.replaceAll(RegExp(r'/+$'), '');
+    final uri = Uri.parse('$sanitizedUrl/accounts/$baseAccount');
+    if (httpClient != null) {
+      final res = await httpClient.get(uri);
+      final body = res?.body?.toString() ?? '';
+      return body.contains('config.memo_required') || body.contains('config.requiring_memo');
+    }
+  } catch (_) {}
+  return false;
+}
+
