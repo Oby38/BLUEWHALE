@@ -4,6 +4,7 @@ import { parse } from "../address/parse";
 import { detect } from "../address/detect";
 import { AddressParseError } from "../address/errors";
 import { normalizeMemoTextId } from "./memo";
+import { withRoutingResultJSON } from "./result";
 
 /**
  * Numeric weight of each warning severity. This ordering is normative and is
@@ -74,10 +75,17 @@ export function isRoutableAddress(address: unknown): address is string {
  * 3. C-addresses: Returned as a structured result with an INVALID_DESTINATION warning.
  * 4. Unknown prefixes / malformed input: Returned with a destinationError.
  *
+ * The result can be passed straight to `JSON.stringify`: it carries a
+ * non-enumerable `toJSON()` that writes `routingId` as a decimal string.
+ *
  * @param input - The destination address and optional memo components.
  * @returns A result containing the base account, routing ID, source, and any warnings.
  */
 export function extractRouting(input: RoutingInput): RoutingResult {
+  return withRoutingResultJSON(extractRoutingResult(input));
+}
+
+function extractRoutingResult(input: RoutingInput): RoutingResult {
   // Only throw for a non-string destination — this is a programmer error, not
   // an address-domain error, and cannot be meaningfully expressed as a
   // RoutingResult.
