@@ -19,20 +19,13 @@ export const MIN_ADDRESS_LENGTH = 4;
  *   Non-strings and inputs shorter than {@link MIN_ADDRESS_LENGTH} fail with `INVALID_LENGTH`.
  */
 export function parse(address: string): ParseResult {
-  // Reject non-strings and inputs too short to hold a version prefix and a
-  // checksum before indexing into them, so callers always get a structured
-  // AddressParseError rather than a TypeError.
-  if (typeof address !== "string") {
-    throw new AddressParseError("INVALID_LENGTH", "", "Address must be a string");
-  }
-  if (address.length < MIN_ADDRESS_LENGTH) {
+  if (address.length > 1024) {
     throw new AddressParseError(
-      "INVALID_LENGTH",
-      address,
-      `Address is too short (${address.length} characters)`
+      "MAX_INPUT_EXCEEDED",
+      address.slice(0, 32),
+      "Address input exceeds maximum allowed length of 1024 bytes"
     );
   }
-
   const up = address.toUpperCase();
   const kind = detect(up);
 

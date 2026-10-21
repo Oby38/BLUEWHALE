@@ -11,8 +11,16 @@ Releases are coordinated with `spec/vectors.json` `spec_version`: see
 
 ### Added
 
+- `isPublicKeyAddress`, `isMuxedAddress` and `isContractAddress` predicates,
+  narrowing to the branded `PublicKeyAddress`, `MuxedAddress` and
+  `ContractAddress` types.
 - A cross-language parity test (`src/spec/warning-codes.test.ts`) that reads
   `spec/schema.json` and asserts the `WarningCode` union matches it.
+- `JSON.stringify(extractRouting(...))` no longer throws on a `bigint`
+  `routingId`: results carry a non-enumerable `toJSON()` that writes the ID
+  as a decimal string. Also adds `stringifyRoutingResult`,
+  `toSerializableRoutingResult`, `routingIdToJSON` and the
+  `SerializedRoutingResult` type (#201).
 
 ### Fixed
 
