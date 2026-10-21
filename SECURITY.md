@@ -1,9 +1,8 @@
 # Security Policy
 
 ## Supported Versions
-We currently support and provide security updates for:
-- **v1.0.1** (Latest stable)
-- **v1.0.x** (Active maintenance)
+We actively support and provide security updates for:
+- **v1.0.x** (Current stable branch)
 
 ## Official Security Contact & PGP Key
 
