@@ -23,6 +23,12 @@ Go module versions are published as git tags of the form
 - `address.AllWarningCodes`, `WarningCode.String` and `WarningCode.IsKnown`,
   plus a cross-language parity test (`spec/warning_codes_test.go`) that reads
   `spec/schema.json` and asserts this package's code list matches it.
+- `xdr.ExtractRoutingFromXDR`: routing results straight from a base64
+  `TransactionEnvelope` (v0, v1 or fee bump) for create account, payment and
+  path payment operations, including muxed destinations. It uses its own XDR
+  reader, so it adds no dependency (#203).
+- `address.DecodeStrKeyInto` and `muxed.DecodeMuxedRaw`: decode into a
+  caller-supplied or pooled buffer with zero heap allocations (#202).
 
 ### Changed
 
@@ -59,6 +65,14 @@ Go module versions are published as git tags of the form
   `ExtractRoutingWithContext` (which forwards the context and short-circuits
   on an already-cancelled one), with the no-context entry point kept as the
   deprecated wrapper.
+
+### Performance
+
+- `muxed.DecodeMuxed` decodes into a `sync.Pool` buffer that is cleared
+  before reuse, leaving the returned G-address string as its only
+  allocation (#202).
+- `address.CalculateCRC16` processes eight bytes per loop iteration; results
+  are unchanged (#207).
 
 ## [1.2.0] - 2026-09-24
 
