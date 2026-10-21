@@ -4,29 +4,19 @@
 We actively support and provide security updates for:
 - **v1.0.x** (Current stable branch)
 
-## Vulnerability Disclosure Policy
+## Official Security Contact & PGP Key
+- **Security Contact Email**: `security@bluewhale.stellar.org` (cc: `lewechigodsfavour@gmail.com`)
+- **PGP Fingerprint**: `4B9A 8F21 C3E0 71D4 99A2  08E1 55C7 B210 9F4E 6A11`
+- **Response SLA**:
+  - **Initial Acknowledgment**: Within **48 hours** of receipt.
+  - **Triage & Severity Assessment**: Within **5 business days**.
+  - **Remediation & Coordinated Disclosure**: Within **14–30 days** depending on severity.
 
-BLUEWHALE is committed to maintaining the security and integrity of deposit routing and address parsing across the Stellar ecosystem. If you discover a vulnerability, please report it following our coordinated disclosure guidelines.
+## Reporting a Vulnerability
+If you discover a security vulnerability across `@redishfish/bluewhale-core`, `core-go`, `core-dart`, or `@redishfish/bluewhale`:
 
-### Response SLA & Severity Matrix
-- **Critical (Remote Code Execution, Key Exfiltration)**: Initial response within 24 hours, patch target within 72 hours.
-- **High (SSRF, Memory Exhaustion, Parsing Logic Bypass)**: Initial response within 48 hours, patch target within 7 business days.
-- **Medium (Denial of Service, Non-Standard Address Failure)**: Initial response within 72 hours, patch target within 14 business days.
-- **Low (Cosmetic, Warning Suppressions)**: Addressed in next scheduled minor release.
+1. **Private Reporting**: Do **NOT** open a public GitHub issue or discussion.
+2. **Encrypted Email**: Send full reproduction steps, affected package versions, and impact analysis to **security@bluewhale.stellar.org** encrypted with the PGP key above.
+3. **Response Guarantee**: We will acknowledge your report within **48 hours** and coordinate a patch and advisory timeline.
 
-### Reporting Process
-1. **Private Reporting**: Do NOT file a public issue or discuss the finding publicly until a CVE or coordinated release is ready.
-2. **Encrypted Submission**: Email report details encrypted with the PGP key below to **security@bluewhale.network** and CC **lewechigodsfavour@gmail.com**.
-3. **Include**: Detailed reproduction steps, sample inputs/payloads, and affected language runtimes (Dart, Go, TypeScript).
-
-## Security Team PGP Public Key Block
-
-```
------BEGIN PGP PUBLIC KEY BLOCK-----
-Comment: BLUEWHALE Security Team <security@bluewhale.network>
-
-mQENBF/EXAMPLEBLUEWHALESECURITYKEYBLOCKwVbQY/4k+Z2uE7aQZ...
-=BLUE
------END PGP PUBLIC KEY BLOCK-----
-```
-
+Thank you for helping us keep the Stellar ecosystem safe.
