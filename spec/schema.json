@@ -102,6 +102,7 @@
       "type": "string",
       "enum": [
         "INVALID_CHECKSUM", "INVALID_LENGTH", "INVALID_BASE32",
+        "INVALID_STRKEY_LENGTH",
         "UNKNOWN_PREFIX", "REJECTED_SEED_KEY", "REJECTED_PREAUTH",
         "REJECTED_HASH_X", "FEDERATION_ADDRESS_NOT_SUPPORTED",
         "INVALID_DOMAIN_NAME"
@@ -129,6 +130,10 @@
         { "$ref": "#/definitions/warningMemoTextTooLong" },
         { "$ref": "#/definitions/warningGeneric" }
       ]
+    },
+    "addressKind": {
+      "type": "string",
+      "enum": ["KindG", "KindC", "KindM", "KindUnknown"]
     }
   },
   "type": "object",
@@ -164,6 +169,7 @@
           "expected": {
             "type": "object",
             "properties": {
+              "kind": { "$ref": "#/definitions/addressKind" },
               "warnings": {
                 "type": "array",
                 "items": { "$ref": "#/definitions/warning" }
