@@ -138,6 +138,9 @@ function extractRoutingResult(input: RoutingInput): RoutingResult {
     throw error;
   }
 
+  // parse() throws instead of returning kind "invalid"; this narrows the
+  // type and guards against that changing. Excluded from coverage.
+  /* v8 ignore next 8 */
   if (parsed.kind === "invalid") {
     return {
       destinationBaseAccount: null,
@@ -212,7 +215,9 @@ function extractRoutingResult(input: RoutingInput): RoutingResult {
         routingId = parsedMemoId.toString();
         routingSource = "memo";
         warnings.push(...norm.warnings);
+        /* v8 ignore start */
       } catch {
+        // normalizeMemoTextId only returns digits, so BigInt() cannot throw.
         routingSource = "none";
         warnings.push(...norm.warnings);
         warnings.push({
@@ -221,6 +226,7 @@ function extractRoutingResult(input: RoutingInput): RoutingResult {
           message: "MEMO_ID was empty, non-numeric, or exceeded uint64 max.",
         });
       }
+      /* v8 ignore stop */
     } else {
       routingSource = "none";
       warnings.push(...norm.warnings);
